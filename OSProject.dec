@@ -1,0 +1,5 @@
+[Defines]
+  DEC_SPECIFICATION = 0x00010005
+  PACKAGE_NAME      = OSProject
+  PACKAGE_GUID      = 97582cda-3669-4b4d-baca-f9e97ff40e81
+  PACKAGE_VERSION   = 0.1
