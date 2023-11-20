@@ -23,6 +23,7 @@
   BaseLib | MdePkg/Library/BaseLib/BaseLib.inf
   DebugLib | MdePkg/Library/UefiDebugLibStdErr/UefiDebugLibStdErr.inf
   DebugPrintErrorLevelLib | MdePkg/Library/BaseDebugPrintErrorLevelLib/BaseDebugPrintErrorLevelLib.inf
+  RngLib | MdePkg/Library/BaseRngLib/BaseRngLib.inf
 
 [Components]
   Wordle/Application/Wordle/Wordle.inf
