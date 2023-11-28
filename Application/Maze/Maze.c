@@ -13,11 +13,7 @@
 #include <Guid/FileInfo.h>
 #include <Guid/FileSystemInfo.h>
 #include <Protocol/SimpleFileSystem.h>
-#include <Protocol/Rng.h>
 #include <Protocol/GraphicsOutput.h>
-#include <Protocol/HiiFont.h>
-#include <Protocol/HiiImage.h>
-#include <Protocol/HiiImageDecoder.h>
 #include <Protocol/LoadedImage.h>
 
 typedef enum {
@@ -105,9 +101,9 @@ EFI_STATUS ReadFile(IN CHAR16 *filename, OUT CHAR8 **word_list, OUT UINTN *size)
 EFI_STATUS GetRandom(OUT UINT8 *result) {
   EFI_STATUS Status = 0;
   *result = 10;
-  EFI_RNG_PROTOCOL *rngProtocol;
-  Status = gBS->LocateProtocol(&gEfiRngProtocolGuid, NULL, (VOID **) &rngProtocol);
-  Print(L"Locate protocol: %d\n", Status);
+//  EFI_RNG_PROTOCOL *rngProtocol;
+//  Status = gBS->LocateProtocol(&gEfiRngProtocolGuid, NULL, (VOID **) &rngProtocol);
+//  Print(L"Locate protocol: %d\n", Status);
   return Status;
 }
 
@@ -293,9 +289,7 @@ UefiMain(
 ) {
   EFI_STATUS Status = EFI_SUCCESS;
   EFI_GRAPHICS_OUTPUT_PROTOCOL *graphicsProtocol;
-  EFI_HII_FONT_PROTOCOL *fontProtocol;
   EFI_GRAPHICS_OUTPUT_BLT_PIXEL * pixels;
-  EFI_IMAGE_OUTPUT * screen_image;
   MAZE maze;
   CHAR8 * mazeData;
   UINTN mazeLen;
@@ -309,12 +303,6 @@ UefiMain(
           (VOID **) &graphicsProtocol
   );
   Print(L"Locate graphics protocol: %d\n", Status);
-  Status = gBS->LocateProtocol(
-          &gEfiHiiFontProtocolGuid,
-          NULL,
-          (VOID **) &fontProtocol
-  );
-  Print(L"Locate font protocol: %d\n", Status);
 
   width = graphicsProtocol->Mode->Info->HorizontalResolution;
   height = graphicsProtocol->Mode->Info->VerticalResolution;
@@ -322,13 +310,6 @@ UefiMain(
   Status = gBS->AllocatePool(EfiLoaderData, sizeof(EFI_GRAPHICS_OUTPUT_BLT_PIXEL) * width * height,
                              (VOID **) &pixels);
   Print(L"Allocate: %d\n", Status);
-  Status = gBS->AllocatePool(EfiLoaderData, sizeof(EFI_IMAGE_OUTPUT), (VOID **) &screen_image);
-  Print(L"Allocate: %d\n", Status);
-
-  screen_image->Height = height;
-  screen_image->Width = width;
-  screen_image->Image.Screen = graphicsProtocol;
-  screen_image->Image.Bitmap = pixels;
 
   for (int i = 0; i < width * height; ++i) {
     pixels[i].Red = 0;
@@ -370,9 +351,9 @@ UefiMain(
             case END:
               endX = j;
               endY = i;
-              pixels[offset + width * (cell_side * i + a) + cell_side * j + b].Red = 0;
-              pixels[offset + width * (cell_side * i + a) + cell_side * j + b].Green = 0;
-              pixels[offset + width * (cell_side * i + a) + cell_side * j + b].Blue = 255;
+              pixels[offset + width * (cell_side * i + a) + cell_side * j + b].Red = 77;
+              pixels[offset + width * (cell_side * i + a) + cell_side * j + b].Green = 109;
+              pixels[offset + width * (cell_side * i + a) + cell_side * j + b].Blue = 243;
               break;
             case UNKNOWN:
               pixels[offset + width * (cell_side * i + a) + cell_side * j + b].Red = 255;
@@ -491,7 +472,6 @@ UefiMain(
   );
 
   gBS->FreePool(pixels);
-  gBS->FreePool(screen_image);
   gBS->FreePool(emptyCell);
   gBS->FreePool(actor);
   gBS->FreePool(mazeData);

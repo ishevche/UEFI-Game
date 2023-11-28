@@ -26,8 +26,6 @@
 
 [Protocols]
   gEfiSimpleTextInProtocolGuid
-  gEfiRngProtocolGuid
-  gEfiBootLogoProtocolGuid
   gEfiLoadedImageDevicePathProtocolGuid
 
 

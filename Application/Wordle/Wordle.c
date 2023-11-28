@@ -90,11 +90,11 @@ EFI_STATUS GetRandom(OUT UINT16 *result) {
   *result = 10;
   EFI_RNG_PROTOCOL *rngProtocol;
   Status = gBS->LocateProtocol(&gEfiRngProtocolGuid, NULL, (VOID **) &rngProtocol);
-  Print(L"Locate protocol: %d\n", Status);
+  Print(L"Locate rng protocol: %d\n", Status);
 
-//  Status = rngProtocol -> GetRNG(rngProtocol, NULL, 32, result);
-//  Print(L"Generate random: %d\n", Status);
-//  Print(L"Random value: %d\n", *result);
+  Status = rngProtocol->GetRNG(rngProtocol, NULL, 1, (UINT8*)result);
+  Print(L"Generate random: %d\n", Status);
+  Print(L"Random value: %d\n", *result);
 //  UINTN size = 0;
 //  EFI_RNG_ALGORITHM  *RNGAlgorithmList;
 //  Status = rngProtocol -> GetInfo(rngProtocol, &size, NULL);
