@@ -12,16 +12,31 @@
 #include <Guid/FileSystemInfo.h>
 #include <Protocol/SimpleFileSystem.h>
 #include <Protocol/Rng.h>
+#include <Library/UefiBootManagerLib.h>
+#include <Library/DevicePathLib.h>
+#include <Protocol/LoadedImage.h>
+#include <Library/UefiBootServicesTableLib.h>
 
-EFI_STATUS ReadFile(OUT CHAR16 **word_list, OUT UINTN *size) {
+EFI_STATUS ReadFile(IN CHAR16 *filename, OUT CHAR8 **word_list, OUT UINTN *size) {
   EFI_STATUS Status = 0;
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL *SimpleFileSystem;
-  EFI_FILE_PROTOCOL * Root = 0;
-  EFI_FILE_PROTOCOL * WordsFile = 0;
+  EFI_FILE_PROTOCOL * Root = NULL;
+  EFI_FILE_PROTOCOL * WordsFile = NULL;
+  EFI_HANDLE * simple_file_system_handles;
+  UINTN handles_num;
 
-  Status = gBS->LocateProtocol(
+  Status = gBS->LocateHandleBuffer(
+          ByProtocol,
           &gEfiSimpleFileSystemProtocolGuid,
           NULL,
+          &handles_num,
+          &simple_file_system_handles
+  );
+  Print(L"Find handles: %d\n", Status);
+  Print(L"Number of handles: %d\n", handles_num);
+  Status = gBS->HandleProtocol(
+          simple_file_system_handles[1],
+          &gEfiSimpleFileSystemProtocolGuid,
           (VOID **) &SimpleFileSystem
   );
   Print(L"Locate FS: %d\n", Status);
@@ -30,7 +45,7 @@ EFI_STATUS ReadFile(OUT CHAR16 **word_list, OUT UINTN *size) {
   Status = Root->Open(
           Root,
           &WordsFile,
-          L"words.txt",
+          filename,
           EFI_FILE_MODE_READ,
           0
   );
@@ -41,27 +56,22 @@ EFI_STATUS ReadFile(OUT CHAR16 **word_list, OUT UINTN *size) {
   /* Get the file size. */
   UINTN buffSize = 0;
   EFI_FILE_INFO *fileInfo = NULL;
-  Status = WordsFile -> GetInfo(WordsFile, &gEfiFileInfoGuid, &buffSize, NULL);
+  Status = WordsFile->GetInfo(WordsFile, &gEfiFileInfoGuid, &buffSize, NULL);
   Print(L"Get fileinfo buffer size: %d\n", Status);
-  Status = gBS -> AllocatePool(EfiLoaderData, buffSize, (VOID **) &fileInfo);
+  Status = gBS->AllocatePool(EfiLoaderData, buffSize, (VOID **) &fileInfo);
   Print(L"Allocate fileinfo buffer: %d\n", Status);
-  Status = WordsFile -> GetInfo(WordsFile, &gEfiFileInfoGuid, &buffSize, fileInfo);
+  Status = WordsFile->GetInfo(WordsFile, &gEfiFileInfoGuid, &buffSize, fileInfo);
   Print(L"Get file info: %d\n", Status);
   *size = fileInfo->FileSize;
   Print(L"File size: %d\n", *size);
-  Status = gBS -> FreePool(fileInfo);
+  Status = gBS->FreePool(fileInfo);
 
   Status = gBS->AllocatePool(EfiLoaderData, *size, (VOID **) word_list);
   Print(L"Memory allocation: %d\n", Status);
 
-
-  (*size) /= sizeof(CHAR16);
-
   for (INTN i = 0; i < *size; ++i) {
-    (*word_list)[i] = 'a';
+    (*word_list)[i] = 0;
   }
-
-  (*size) *= sizeof(CHAR16);
 
   Status = WordsFile->SetPosition(WordsFile, 0);
   Print(L"Reset file position: %d\n", Status);
@@ -69,16 +79,16 @@ EFI_STATUS ReadFile(OUT CHAR16 **word_list, OUT UINTN *size) {
   Print(L"Read file: %d\n", Status);
   Status = WordsFile->Close(WordsFile);
   Print(L"Close file: %d\n", Status);
-  (*word_list)[(*size) / sizeof(CHAR16) - 1] = '\0';
+  (*word_list)[(*size) - 1] = 0;
   Status = Root->Close(Root);
   Print(L"Close root: %d\n", Status);
   return Status;
 }
 
-EFI_STATUS GetRandom(OUT UINT8 *result) {
+EFI_STATUS GetRandom(OUT UINT16 *result) {
   EFI_STATUS Status = 0;
   *result = 10;
-  EFI_RNG_PROTOCOL * rngProtocol;
+  EFI_RNG_PROTOCOL *rngProtocol;
   Status = gBS->LocateProtocol(&gEfiRngProtocolGuid, NULL, (VOID **) &rngProtocol);
   Print(L"Locate protocol: %d\n", Status);
 
@@ -93,7 +103,8 @@ EFI_STATUS GetRandom(OUT UINT8 *result) {
 //  Print(L"Allocate fileinfo buffer: %d\n", Status);
 //  Status = rngProtocol -> GetInfo(rngProtocol, &size, RNGAlgorithmList);
 //  Print(L"Get rngProtocol info: %d\n", Status);
-  return Status;
+//  GetRandomNumber16(result)
+  return 0;
 }
 
 EFI_STATUS
@@ -106,10 +117,10 @@ UefiMain(
 
   CHAR16 * word_list;
   UINTN length;
-  Status = ReadFile(&word_list, &length);
+  Status = ReadFile(L"words.txt", (CHAR8 * *) & word_list, &length);
   Print(L"File size: %d\n", length);
 
-  UINT8 word_idx;
+  UINT16 word_idx;
   Status = GetRandom(&word_idx);
 
   CHAR16 word[6] = {'\0', '\0', '\0', '\0', '\0', '\0'};
@@ -135,7 +146,7 @@ UefiMain(
     for (UINTN idx = 0; idx < 5; ++idx) {
       if (input_word[idx] == word[idx]) {
         reply[idx] = '+';
-        pluses ++;
+        pluses++;
       } else {
         for (UINTN idx_2 = 0; idx_2 < 5; ++idx_2) {
           if (input_word[idx] == word[idx_2]) {
@@ -148,12 +159,15 @@ UefiMain(
     Print(reply);
     Print(L"\n");
     if (pluses == 5) {
+      EFI_BOOT_MANAGER_LOAD_OPTION *BootOption;
+      UINTN BootOptionCount;
+      BootOption = EfiBootManagerGetLoadOptions(&BootOptionCount, LoadOptionTypeBoot);
+      EfiBootManagerBoot(&BootOption[3]);
       break;
     }
   }
   Print(L"Game ended");
 
   gBS->FreePool(word_list);
-
   return Status;
 }

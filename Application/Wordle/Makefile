@@ -31,7 +31,9 @@ populated-image: formatted-image copy-executable
 
 qemu: populated-image
 	qemu-system-x86_64 \
+	  -enable-kvm \
+	  -cdrom ${WORKSPACE}/Wordle/ubuntu-22.04.3-desktop-amd64.iso \
+	  -drive format=raw,file=${IMAGE_PATH} \
       -drive if=pflash,format=raw,readonly=on,file=${CODE} \
       -drive if=pflash,format=raw,file=${VARS} \
-      -drive format=raw,file=${IMAGE_PATH} \
-      -nographic -net none
+      -net none -nographic

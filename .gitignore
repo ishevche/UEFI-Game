@@ -1,3 +1,5 @@
 .idea
 drive-image*
 cmake-build-*
+*.iso
+.PVS-Studio

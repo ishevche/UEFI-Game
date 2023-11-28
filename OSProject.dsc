@@ -24,6 +24,19 @@
   DebugLib | MdePkg/Library/UefiDebugLibStdErr/UefiDebugLibStdErr.inf
   DebugPrintErrorLevelLib | MdePkg/Library/BaseDebugPrintErrorLevelLib/BaseDebugPrintErrorLevelLib.inf
   RngLib | MdePkg/Library/BaseRngLib/BaseRngLib.inf
+  UefiBootServicesTableLib | MdePkg/Library/UefiBootServicesTableLib/UefiBootServicesTableLib.inf
+  UefiBootManagerLib | MdeModulePkg/Library/UefiBootManagerLib/UefiBootManagerLib.inf
+  HobLib | MdePkg/Library/DxeHobLib/DxeHobLib.inf
+  PerformanceLib | MdePkg/Library/BasePerformanceLibNull/BasePerformanceLibNull.inf
+  PeCoffGetEntryPointLib | MdePkg/Library/BasePeCoffGetEntryPointLib/BasePeCoffGetEntryPointLib.inf
+  DxeServicesTableLib | MdePkg/Library/DxeServicesTableLib/DxeServicesTableLib.inf
+  DxeServicesLib | MdePkg/Library/DxeServicesLib/DxeServicesLib.inf
+  ReportStatusCodeLib | MdePkg/Library/BaseReportStatusCodeLibNull/BaseReportStatusCodeLibNull.inf
+  HiiLib | MdeModulePkg/Library/UefiHiiLib/UefiHiiLib.inf
+  SortLib | MdeModulePkg/Library/BaseSortLib/BaseSortLib.inf
+  VariablePolicyHelperLib | MdeModulePkg/Library/VariablePolicyHelperLib/VariablePolicyHelperLib.inf
+  UefiHiiServicesLib | MdeModulePkg/Library/UefiHiiServicesLib/UefiHiiServicesLib.inf
 
 [Components]
   Wordle/Application/Wordle/Wordle.inf
+  Wordle/Application/Maze/Maze.inf
