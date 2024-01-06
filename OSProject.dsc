@@ -40,3 +40,5 @@
 [Components]
   Wordle/Application/Wordle/Wordle.inf
   Wordle/Application/Maze/Maze.inf
+  Wordle/Application/BootManager/BootManager.inf
+  Wordle/Application/XV6/XV6.inf

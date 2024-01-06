@@ -1,0 +1,41 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BootManager
+  FILE_GUID                      = 6987936E-ED34-44db-AE97-1FA5E4ED2117
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = UefiMain
+
+[Sources]
+  Tests.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+
+[LibraryClasses]
+  DxeServicesLib
+  UefiApplicationEntryPoint
+  UefiLib
+  RngLib
+  UefiBootServicesTableLib
+  UefiApplicationEntryPoint
+  UefiBootManagerLib
+
+[Protocols]
+  gEfiSimpleTextInProtocolGuid
+  gEfiLoadedImageDevicePathProtocolGuid
+  gEfiRngProtocolGuid
+  gEfiSimpleFileSystemProtocolGuid
+  gEfiDevicePathToTextProtocolGuid
+
+[Depex]
+  gEfiRngProtocolGuid
+
+[Guids]
+  gEfiFileInfoGuid
+  gEfiRngAlgorithmSp80090Ctr256Guid
+  gEfiRngAlgorithmSp80090Hash256Guid
+  gEfiRngAlgorithmSp80090Hmac256Guid
+  gEfiRngAlgorithmRaw
+  gEfiFileSystemInfoGuid

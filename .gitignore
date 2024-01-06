@@ -1,5 +1,9 @@
 .idea
 drive-image*
 cmake-build-*
+*.img
 *.iso
 .PVS-Studio
+
+[Tt]ests
+*[Tt]mp*

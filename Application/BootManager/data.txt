@@ -1,0 +1,337 @@
+Locate graphics protocol: 0
+Graphics max mode: 30
+Graphics cur mode: 0
+Graphics size of info struct: 36
+Graphics size of frame buffer: 4096000
+
+ ----Info about all available modes:----
+
+        Mode #0:
+Graphics info version: 0
+Graphics info height: 800
+Graphics info width: 1280
+Graphics info scanline size: 1280
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #1:
+Graphics info version: 0
+Graphics info height: 480
+Graphics info width: 640
+Graphics info scanline size: 640
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #2:
+Graphics info version: 0
+Graphics info height: 480
+Graphics info width: 800
+Graphics info scanline size: 800
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #3:
+Graphics info version: 0
+Graphics info height: 600
+Graphics info width: 800
+Graphics info scanline size: 800
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #4:
+Graphics info version: 0
+Graphics info height: 624
+Graphics info width: 832
+Graphics info scanline size: 832
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #5:
+Graphics info version: 0
+Graphics info height: 640
+Graphics info width: 960
+Graphics info scanline size: 960
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #6:
+Graphics info version: 0
+Graphics info height: 600
+Graphics info width: 1024
+Graphics info scanline size: 1024
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #7:
+Graphics info version: 0
+Graphics info height: 768
+Graphics info width: 1024
+Graphics info scanline size: 1024
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #8:
+Graphics info version: 0
+Graphics info height: 864
+Graphics info width: 1152
+Graphics info scanline size: 1152
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #9:
+Graphics info version: 0
+Graphics info height: 870
+Graphics info width: 1152
+Graphics info scanline size: 1152
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #10:
+Graphics info version: 0
+Graphics info height: 720
+Graphics info width: 1280
+Graphics info scanline size: 1280
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #11:
+Graphics info version: 0
+Graphics info height: 760
+Graphics info width: 1280
+Graphics info scanline size: 1280
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #12:
+Graphics info version: 0
+Graphics info height: 768
+Graphics info width: 1280
+Graphics info scanline size: 1280
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #13:
+Graphics info version: 0
+Graphics info height: 960
+Graphics info width: 1280
+Graphics info scanline size: 1280
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #14:
+Graphics info version: 0
+Graphics info height: 1024
+Graphics info width: 1280
+Graphics info scanline size: 1280
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #15:
+Graphics info version: 0
+Graphics info height: 768
+Graphics info width: 1360
+Graphics info scanline size: 1360
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #16:
+Graphics info version: 0
+Graphics info height: 768
+Graphics info width: 1366
+Graphics info scanline size: 1366
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #17:
+Graphics info version: 0
+Graphics info height: 1050
+Graphics info width: 1400
+Graphics info scanline size: 1400
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #18:
+Graphics info version: 0
+Graphics info height: 900
+Graphics info width: 1440
+Graphics info scanline size: 1440
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #19:
+Graphics info version: 0
+Graphics info height: 900
+Graphics info width: 1600
+Graphics info scanline size: 1600
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #20:
+Graphics info version: 0
+Graphics info height: 1200
+Graphics info width: 1600
+Graphics info scanline size: 1600
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #21:
+Graphics info version: 0
+Graphics info height: 1050
+Graphics info width: 1680
+Graphics info scanline size: 1680
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #22:
+Graphics info version: 0
+Graphics info height: 1080
+Graphics info width: 1920
+Graphics info scanline size: 1920
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #23:
+Graphics info version: 0
+Graphics info height: 1200
+Graphics info width: 1920
+Graphics info scanline size: 1920
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #24:
+Graphics info version: 0
+Graphics info height: 1440
+Graphics info width: 1920
+Graphics info scanline size: 1920
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #25:
+Graphics info version: 0
+Graphics info height: 2000
+Graphics info width: 2000
+Graphics info scanline size: 2000
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #26:
+Graphics info version: 0
+Graphics info height: 1536
+Graphics info width: 2048
+Graphics info scanline size: 2048
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #27:
+Graphics info version: 0
+Graphics info height: 2048
+Graphics info width: 2048
+Graphics info scanline size: 2048
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #28:
+Graphics info version: 0
+Graphics info height: 1440
+Graphics info width: 2560
+Graphics info scanline size: 2560
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
+
+        Mode #29:
+Graphics info version: 0
+Graphics info height: 1600
+Graphics info width: 2560
+Graphics info scanline size: 2560
+Pixel format: PixelBlueGreenRedReserved8BitPerColor
+Pixel bitmask red: 0
+Pixel bitmask green: 0
+Pixel bitmask blue: 0
+Pixel bitmask reserved: 0
