@@ -2,14 +2,12 @@
 #include "Config.h"
 #include "FileSystems.h"
 #include "BMPReader.h"
-#include "Graphics.h"
 #include "DemoGame.h"
 #include <time.h>
 #include <stdlib.h>
 #include <Library/BaseMemoryLib.h>
 #include <Library/DevicePathLib.h>
 #include <Protocol/LoadedImage.h>
-#include <stdio.h>
 
 #define BOOT_OPTION 1
 
@@ -50,7 +48,7 @@ EFI_STATUS EFIAPI UefiMain(
 
   UINTN BootEntriesCount = 0;
   BOOT_ENTRY *BootEntries;
-  Status = ParseConfigFile((CHAR16 *) L"config.txt", &BootEntries, &BootEntriesCount);
+  Status = ParseConfigFile((CHAR16 *) L"3DConfig.txt", &BootEntries, &BootEntriesCount);
   if (CheckError(Status, (CHAR16 *) L"while parsing config file")) return Status;
 
   UINTN HandlesCount;

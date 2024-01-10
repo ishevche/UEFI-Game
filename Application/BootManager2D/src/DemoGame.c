@@ -65,7 +65,6 @@ UINTN Game(INTN *Map, UINTN MapWidth, UINTN MapHeight,
 
   PlaceBootEntries(Map, MapWidth, MapHeight, &Textures, &TexturesCount, BootEntries, BootEntriesCount);
 
-  Print(L"Embeding boot entries: done\n");
   EFI_GRAPHICS_OUTPUT_PROTOCOL *graphicsProtocol;
 
   gBS->LocateProtocol(&gEfiGraphicsOutputProtocolGuid, NULL, (VOID **) &graphicsProtocol);

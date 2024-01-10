@@ -50,7 +50,7 @@ EFI_STATUS EFIAPI UefiMain(
 
   UINTN BootEntriesCount = 0;
   BOOT_ENTRY *BootEntries;
-  Status = ParseConfigFile((CHAR16 *) L"config.txt", &BootEntries, &BootEntriesCount);
+  Status = ParseConfigFile((CHAR16 *) L"2DConfig.txt", &BootEntries, &BootEntriesCount);
   if (CheckError(Status, (CHAR16 *) L"while parsing config file")) return Status;
 
   UINTN HandlesCount;
@@ -76,13 +76,11 @@ EFI_STATUS EFIAPI UefiMain(
     Textures[i] = CutInHalf(Texture, Width, Height);
     MyFreePool(Texture);
   }
-  Print(L"3D Done\n");
 
   EFI_GRAPHICS_OUTPUT_BLT_PIXEL *Sprite;
   UINTN Width, Height;
   Status = ParseSprite(L"Sprite.txt", &Sprite, &Width, &Height);
   if (CheckError(Status, L"reading actor file")) return Status;
-  Print(L"Sprite done\n");
 
   UINTN EntryToBoot = Game(Numbers, MapWidth, MapHeight, Textures, TexturesCount, BootEntries,
                            BootEntriesCount, Sprite);

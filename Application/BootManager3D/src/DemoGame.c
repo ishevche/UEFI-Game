@@ -57,7 +57,6 @@ VOID PlaceBootEntries(INTN *Map, UINTN MapWidth, UINTN MapHeight,
         if (cell >= 10 && cell < bootable_start) {
           if (escape_count == rand_index) {
             Map[y * MapWidth + x] = *TexturesCount;
-            Print(L"Texture #%d is %s\n", *TexturesCount, BootEntries[i].title);
             MakeBootEntryTexture(BootEntries[i], cell, Textures, TexturesCount);
             escape_count++;
           } else {
@@ -81,12 +80,14 @@ UINTN Game(INTN *Map, UINTN MapWidth, UINTN MapHeight,
 
 
   gBS->LocateProtocol(&gEfiGraphicsOutputProtocolGuid, NULL, (VOID **) &graphicsProtocol);
-  UINTN screenWidth = graphicsProtocol->Mode->Info->HorizontalResolution;
-  UINTN screenHeight = graphicsProtocol->Mode->Info->VerticalResolution;
+  UINTN ImageWidth = 960;
+  UINTN ImageHeight = 640;
+  UINTN WidthMargin = (graphicsProtocol->Mode->Info->HorizontalResolution - ImageWidth) / 2;
+  UINTN HeightMargin = (graphicsProtocol->Mode->Info->VerticalResolution - ImageHeight) / 2;
 
 
   EFI_GRAPHICS_OUTPUT_BLT_PIXEL * screen =
-          AllocateZeroPool(sizeof(EFI_GRAPHICS_OUTPUT_BLT_PIXEL) * screenWidth * screenHeight);
+          AllocateZeroPool(sizeof(EFI_GRAPHICS_OUTPUT_BLT_PIXEL) * ImageWidth * ImageHeight);
   double posX = 1.5, posY = 17.5;
   double dirX = 1.0, dirY = 0.0;
   double planeX = 0.0, planeY = 0.66;
@@ -95,25 +96,25 @@ UINTN Game(INTN *Map, UINTN MapWidth, UINTN MapHeight,
   BOOLEAN ready_to_boot = FALSE;
   UINTN EntryToBoot = ESCAPE_ENTRY;
   while (!ready_to_boot) {
-    for (int y = 0; y < screenHeight; y++) {
+    for (int y = 0; y < ImageHeight; y++) {
       double rayDirX0 = dirX - planeX;
       double rayDirY0 = dirY - planeY;
       double rayDirX1 = dirX + planeX;
       double rayDirY1 = dirY + planeY;
 
-      int p = y - screenHeight / 2;
+      int p = y - ImageHeight / 2;
 
-      double posZ = 0.5 * screenHeight;
+      double posZ = 0.5 * ImageHeight;
 
       double rowDistance = posZ / p;
 
-      double floorStepX = rowDistance * (rayDirX1 - rayDirX0) / screenWidth;
-      double floorStepY = rowDistance * (rayDirY1 - rayDirY0) / screenWidth;
+      double floorStepX = rowDistance * (rayDirX1 - rayDirX0) / ImageWidth;
+      double floorStepY = rowDistance * (rayDirY1 - rayDirY0) / ImageWidth;
 
       double floorX = posX + rowDistance * rayDirX0;
       double floorY = posY + rowDistance * rayDirY0;
 
-      for (UINT16 x = 0; x < screenWidth; ++x) {
+      for (UINT16 x = 0; x < ImageWidth; ++x) {
         int cellX = (int) (floorX);
         int cellY = (int) (floorY);
 
@@ -129,17 +130,17 @@ UINTN Game(INTN *Map, UINTN MapWidth, UINTN MapHeight,
         color.Blue /= 2;
         color.Green /= 2;
         color.Red /= 2;
-        screen[y * screenWidth + x] = color;
+        screen[y * ImageWidth + x] = color;
 
         color = Textures[ceilNum][ty * texWidth + tx];
         color.Blue /= 2;
         color.Green /= 2;
         color.Red /= 2;
-        screen[(screenHeight - y - 1) * screenWidth + x] = color;
+        screen[(ImageHeight - y - 1) * ImageWidth + x] = color;
       }
     }
-    for (int x = 0; x < screenWidth; x++) {
-      double cameraX = 2 * x / (double) screenWidth - 1;
+    for (int x = 0; x < ImageWidth; x++) {
+      double cameraX = 2 * x / (double) ImageWidth - 1;
       double rayDirX = dirX + planeX * cameraX;
       double rayDirY = dirY + planeY * cameraX;
       int mapX = (int) posX;
@@ -188,12 +189,12 @@ UINTN Game(INTN *Map, UINTN MapWidth, UINTN MapHeight,
       if (side == 0) perpWallDist = (sideDistX - deltaDistX);
       else perpWallDist = (sideDistY - deltaDistY);
 
-      int lineHeight = (int) (screenHeight / perpWallDist);
+      int lineHeight = (int) (ImageHeight / perpWallDist);
 
-      int drawStart = -lineHeight / 2 + screenHeight / 2;
+      int drawStart = -lineHeight / 2 + ImageHeight / 2;
       if (drawStart < 0) drawStart = 0;
-      int drawEnd = lineHeight / 2 + screenHeight / 2;
-      if (drawEnd >= screenHeight) drawEnd = screenHeight - 1;
+      int drawEnd = lineHeight / 2 + ImageHeight / 2;
+      if (drawEnd >= ImageHeight) drawEnd = ImageHeight - 1;
 
       int texNum = Map[mapY * MapWidth + mapX];
 
@@ -208,7 +209,7 @@ UINTN Game(INTN *Map, UINTN MapWidth, UINTN MapHeight,
 
       double step = 1.0 * texHeight / lineHeight;
       // Starting texture coordinate
-      double texPos = (drawStart - (double) screenHeight / 2 + (double) lineHeight / 2) * step;
+      double texPos = (drawStart - (double) ImageHeight / 2 + (double) lineHeight / 2) * step;
       for (int y = drawStart; y < drawEnd; y++) {
         int texY = (int) texPos & (texHeight - 1);
         texPos += step;
@@ -218,7 +219,7 @@ UINTN Game(INTN *Map, UINTN MapWidth, UINTN MapHeight,
           color.Green /= 2;
           color.Red /= 2;
         }
-        screen[y * screenWidth + x] = color;
+        screen[y * ImageWidth + x] = color;
       }
     }
 
@@ -227,9 +228,9 @@ UINTN Game(INTN *Map, UINTN MapWidth, UINTN MapHeight,
             screen,
             EfiBltBufferToVideo,
             0, 0,
-            0, 0,
-            screenWidth, screenHeight,
-            screenWidth * sizeof(EFI_GRAPHICS_OUTPUT_BLT_PIXEL)
+            WidthMargin, HeightMargin,
+            ImageWidth, ImageHeight,
+            ImageWidth * sizeof(EFI_GRAPHICS_OUTPUT_BLT_PIXEL)
     );
 
     UINTN what;
@@ -287,8 +288,8 @@ UINTN Game(INTN *Map, UINTN MapWidth, UINTN MapHeight,
           graphicsProtocol,
           &Black,
           EfiBltVideoFill,
-          0, 0, 0, 0,
-          screenWidth, screenHeight, 0
+          0, 0, WidthMargin, HeightMargin,
+          ImageWidth, ImageHeight, 0
   );
   return EntryToBoot;
 }
