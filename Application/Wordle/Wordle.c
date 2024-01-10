@@ -1,21 +1,13 @@
 #include <Uefi.h>
+#include <Base.h>
+#include <Uefi/UefiBaseType.h>
+#include <X64/ProcessorBind.h>
 #include <Library/UefiLib.h>
-#include <Library/UefiApplicationEntryPoint.h>
-#include <Library/BaseMemoryLib.h>
-#include <Library/BaseLib.h>
 #include <Library/UefiBootServicesTableLib.h>
-#include <Library/PrintLib.h>
-#include <Library/DebugLib.h>
-#include <Library/RngLib.h>
-#include <Library/BaseMemoryLib.h>
 #include <Guid/FileInfo.h>
-#include <Guid/FileSystemInfo.h>
 #include <Protocol/SimpleFileSystem.h>
 #include <Protocol/Rng.h>
-#include <Library/UefiBootManagerLib.h>
-#include <Library/DevicePathLib.h>
-#include <Protocol/LoadedImage.h>
-#include <Library/UefiBootServicesTableLib.h>
+#include <Library/UefiBootManagerLib.h>\
 
 EFI_STATUS ReadFile(IN CHAR16 *filename, OUT CHAR8 **word_list, OUT UINTN *size) {
   EFI_STATUS Status = 0;

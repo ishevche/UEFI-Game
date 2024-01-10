@@ -8,6 +8,8 @@
 
 [Sources]
   xv6.c
+  xv6.h
+  elf.h
 
 [Packages]
   MdePkg/MdePkg.dec
@@ -29,7 +31,6 @@
   gEfiBlockIoProtocolGuid
   gEfiLoadedImageProtocolGuid
   gEfiLoadedImageDevicePathProtocolGuid
-
 
 [FeaturePcd]
 

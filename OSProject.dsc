@@ -9,6 +9,7 @@
   SKUID_IDENTIFIER        = DEFAULT
 
 !include MdePkg/MdeLibs.dsc.inc
+!include StdLib/StdLib.inc
 
 [LibraryClasses]
   UefiApplicationEntryPoint | MdePkg/Library/UefiApplicationEntryPoint/UefiApplicationEntryPoint.inf
@@ -36,9 +37,14 @@
   SortLib | MdeModulePkg/Library/BaseSortLib/BaseSortLib.inf
   VariablePolicyHelperLib | MdeModulePkg/Library/VariablePolicyHelperLib/VariablePolicyHelperLib.inf
   UefiHiiServicesLib | MdeModulePkg/Library/UefiHiiServicesLib/UefiHiiServicesLib.inf
+  FileHandleLib | MdePkg/Library/UefiFileHandleLib/UefiFileHandleLib.inf
+  LibC | StdLib/LibC/LibC.inf
+  LibStdio | StdLib/LibC/Stdio/Stdio.inf
+  LibMath | StdLib/LibC/Math/Math.inf
 
 [Components]
   Wordle/Application/Wordle/Wordle.inf
   Wordle/Application/Maze/Maze.inf
-  Wordle/Application/BootManager/BootManager.inf
   Wordle/Application/XV6/XV6.inf
+  Wordle/Application/BootManager2D/BootManager2D.inf
+  Wordle/Application/BootManager3D/BootManager3D.inf

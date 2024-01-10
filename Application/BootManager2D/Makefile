@@ -1,14 +1,14 @@
 PROJECT_PATH = Wordle
-IMAGE_PATH = drive-image1.fat
-GPT_IMAGE_PATH = gpt-image.img
+IMAGE_PATH = drive-image.fat
+GPT_IMAGE_PATH = drive_image.img
 IMAGE_CONTENT_DIR = drive-image
 
-MODULEFILE = $(PROJECT_PATH)/Application/BootManager/BootManager.inf
+MODULEFILE = $(PROJECT_PATH)/Application/BootManager2D/BootManager2D.inf
 TOOL_CHAIN_CONF = Conf/tools_def.txt
 CODE = ${WORKSPACE}/Build/OvmfX64/DEBUG_GCC/FV/OVMF_CODE.fd
 VARS = ${WORKSPACE}/Build/OvmfX64/DEBUG_GCC/FV/OVMF_VARS.fd
 EXECUTABLE_LOCATION = ${WORKSPACE}/Build/OSProject/DEBUG_GCC/X64
-EXECUTABLE_NAME = BootManager.efi
+EXECUTABLE_NAME = BootManager2D.efi
 
 all: qemu
 
@@ -32,7 +32,7 @@ populated-image: formatted-image copy-executable
 
 copied-image: populated-image
 	sudo kpartx -av $(GPT_IMAGE_PATH)
-	sudo dd if=$(IMAGE_PATH) of=/dev/mapper/loop0p1 bs=10M
+	sudo dd if=$(IMAGE_PATH) of=/dev/mapper/loop0p4 bs=40M
 	sudo kpartx -dv $(GPT_IMAGE_PATH)
 
 qemu: copied-image
@@ -41,6 +41,6 @@ qemu: copied-image
       -drive format=raw,file=$(GPT_IMAGE_PATH) \
       -drive if=pflash,format=raw,readonly=on,file=$(CODE) \
       -drive if=pflash,format=raw,file=$(VARS) \
-      -net none
+      -net none -m 2G
 #      -cdrom $(WORKSPACE)/Wordle/ubuntu-22.04.3-desktop-amd64.iso \
 #      -nographic \

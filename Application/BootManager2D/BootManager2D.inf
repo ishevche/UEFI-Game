@@ -1,0 +1,52 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BootManager2D
+  FILE_GUID                      = 6987936E-ED34-44db-AE97-1FA5E4ED2117
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = UefiMain
+
+[Sources]
+  src/Main.c
+  src/Config.c
+  include/Config.h
+  src/Common.c
+  include/Common.h
+  src/FileSystems.c
+  include/FileSystems.h
+  src/BMPReader.c
+  include/BMPReader.h
+  src/DemoGame.c
+  include/DemoGame.h
+  src/Graphics.c
+  include/Graphics.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  StdLib/StdLib.dec
+
+[LibraryClasses]
+  DxeServicesLib
+  UefiApplicationEntryPoint
+  UefiLib
+  RngLib
+  UefiBootServicesTableLib
+  UefiApplicationEntryPoint
+  FileHandleLib
+  LibC
+  LibStdio
+  LibMath
+
+[Protocols]
+  gEfiSimpleTextInProtocolGuid
+  gEfiLoadedImageDevicePathProtocolGuid
+  gEfiSimpleFileSystemProtocolGuid
+  gEfiDevicePathToTextProtocolGuid
+  gEfiLoadedImageProtocolGuid
+
+[Depex]
+
+[Guids]
+  gEfiFileInfoGuid
+  gEfiFileSystemInfoGuid
