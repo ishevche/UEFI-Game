@@ -1,0 +1,16 @@
+title: ALPINE
+volume: A320FB97-C99C-4399-9BE6-3DC261E3D216
+loader: alpine\vmlinuz-lts
+icon: textures\ALPINE.BMP
+options: root=UUID=6d269597-b3ef-426a-bddd-45ebc11e3cdd modules=sd-mod,usb-storage,ext4 rootfstype=ext4 initrd=alpine\initramfs-lts
+
+title: ARCH
+volume: A320FB97-C99C-4399-9BE6-3DC261E3D216
+loader: vmlinuz-linux
+icon: textures\ARCH.BMP
+options: root=LABEL=arch rw initrd=intel-ucode.img initrd=initramfs-linux.img
+
+title: Maze
+volume: D277AC3C-E80A-4C06-818B-8EFF940773AF
+loader: EFI\BootManager3D.efi
+icon: textures\WIZARD.BMP
