@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Klym
+    given-names: Yaroslav
+  - family-names: Kocherkevych
+    given-names: Viktoria
+  - family-names: Shevchenko
+    given-names: Ivan
+title: "UEFI-game with bootloader functions"
+version: 1.0.0
+date-released: 2024-01-10
